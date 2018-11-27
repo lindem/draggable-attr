@@ -1,57 +1,17 @@
-# draggablebug
+This repo shows behaviour from ember 3.5 that likely constitutes a bug.
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+The alleged bug affects the `draggable` attribute on HTML elements (spec: [https://www.w3.org/TR/html51/editing.html#the-draggable-attribute](section 5.7.7)).
 
-## Prerequisites
+It seems that ember does not allow to set the draggable attribute explicitly to
+`"false"`, which is a legitimate value for the attribute and prevents `img` and
+`a` elements from being draggable.
 
-You will need the following things properly installed on your computer.
+This repository uses a curly component with an `attributeBinding`. It seems that
+whenever a non-null value is set to the property, the result is <strong>always</strong>
+`draggable="true"`, which is wrong.
 
-* [Git](https://git-scm.com/)
-* [Node.js](https://nodejs.org/) (with npm)
-* [Ember CLI](https://ember-cli.com/)
-* [Google Chrome](https://google.com/chrome/)
+Steps to try it:
 
-## Installation
-
-* `git clone <repository-url>` this repository
-* `cd draggablebug`
-* `npm install`
-
-## Running / Development
-
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-* Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
-
-### Code Generators
-
-Make use of the many generators for code, try `ember help generate` for more details
-
-### Running Tests
-
-* `ember test`
-* `ember test --server`
-
-### Linting
-
-* `npm run lint:hbs`
-* `npm run lint:js`
-* `npm run lint:js -- --fix`
-
-### Building
-
-* `ember build` (development)
-* `ember build --environment production` (production)
-
-### Deploying
-
-Specify what it takes to deploy your app.
-
-## Further Reading / Useful Links
-
-* [ember.js](https://emberjs.com/)
-* [ember-cli](https://ember-cli.com/)
-* Development Browser Extensions
-  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+- Check out this repo
+- install dependencies and `ember s`
+- browse to the application, mostly https://localhost:4200
