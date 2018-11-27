@@ -1,6 +1,6 @@
 This repo shows behaviour from ember 3.5 that likely constitutes a bug.
 
-The alleged bug affects the `draggable` attribute on HTML elements (spec: [https://www.w3.org/TR/html51/editing.html#the-draggable-attribute](section 5.7.7)).
+The alleged bug affects the `draggable` attribute on HTML elements (spec: [section 5.7.7](https://www.w3.org/TR/html51/editing.html#the-draggable-attribute)).
 
 It seems that ember does not allow to set the draggable attribute explicitly to
 `"false"`, which is a legitimate value for the attribute and prevents `img` and
