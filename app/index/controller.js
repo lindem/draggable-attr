@@ -1,6 +1,6 @@
 import Controller from '@ember/controller';
 import {computed} from '@ember/object';
-import Ember from 'ember';
+import {VERSION} from '@ember/version';
 
 function getDraggableAttr(sel) {
   return document.querySelector(sel).outerHTML;
@@ -9,7 +9,7 @@ function getDraggableAttr(sel) {
 export default Controller.extend({
   lockstatus: true,
   version: computed(function() {
-    return Ember.VERSION;
+    return VERSION;
   }),
   draggableState: computed('lockstatus', function() {
     return this.lockstatus ? 'false' : 'true';
@@ -26,4 +26,7 @@ export default Controller.extend({
   normalDivAttr: computed('lockstatus', function() {
     return getDraggableAttr('.normal-div');
   }),
+  staticDivAttr: computed(function() {
+    return getDraggableAttr('.static-div');
+  })
 });
