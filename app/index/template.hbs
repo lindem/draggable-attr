@@ -1,16 +1,22 @@
-<h1>Unexplained behaviour in Ember 3.5</h1>
+<h1>Unexplained behaviour in Handlebars/HTMLBars/Ember {{version}}</h1>
 <hr>
 <p>
   The draggable attribute can legitimately be set to three states as per the
-  HTML 5.1 standard, <a href="https://www.w3.org/TR/html51/editing.html#the-draggable-attribute">section 5.7.7</a>:
+  HTML 5.1 standard, <a
+  href="https://www.w3.org/TR/html51/editing.html#the-draggable-attribute">section
+  5.7.7</a>:
 </p>
 <blockquote>
-  All html elements may have the draggable content attribute set. The draggable attribute is an enumerated attribute.
-  It has three states. The first state is true and it has the keyword true. The second state is false and it has the
-  keyword false. The third state is auto; it has no keywords but it is the missing value default.
+  All html elements may have the draggable content attribute set. The draggable
+  attribute is an enumerated attribute.
+  It has three states. The first state is true and it has the keyword true. The
+  second state is false and it has the
+  keyword false. The third state is auto; it has no keywords but it is the
+  missing value default.
 </blockquote>
 <p>
-  However, I cannot seem to set draggable to explicit <code>"false"</code>; I can only set draggable to null, which
+  However, I cannot seem to set draggable to explicit <code>"false"</code>; I
+  can only set draggable to null, which
   equals <code>auto</code>.
 </p>
 <hr>
@@ -20,3 +26,28 @@
 </label>
 
 {{dnd-wrapper locked=lockstatus}}
+
+<AngleBracket draggable=draggableState></AngleBracket>
+
+<div class="normal-div" draggable={{draggableState}}>(no-component-div)</div>
+
+<table border>
+  <tr>
+    <th>Element</th>
+    <th>is</th>
+    <th>should</th>
+  </tr>
+  <tr>
+    <td>Curly</td>
+    <td><code>{{curlyAttr}}</code></td>
+    <td rowspan=3><code>draggable="{{draggableState}}"</code></td>
+  </tr>
+  <tr>
+    <td>Angle-Bracket</td>
+    <td><code>{{angleAttr}}</code></td>
+  </tr>
+  <tr>
+    <td>no-component-div</td>
+    <td><code>{{normalDivAttr}}</code></td>
+  </tr>
+</table>
