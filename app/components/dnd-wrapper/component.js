@@ -7,6 +7,6 @@ export default Component.extend({
   classNames: ['curly-example'],
 
   draggableAttribute: computed('locked', function() {
-    return this.locked ? 'false' : 'true';
+    return this.locked ? false : true;
   })
 });
