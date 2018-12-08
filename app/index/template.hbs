@@ -2,9 +2,8 @@
 <hr>
 <p>
   The draggable attribute can legitimately be set to three states as per the
-  HTML 5.1 standard, <a
-  href="https://www.w3.org/TR/html51/editing.html#the-draggable-attribute">section
-  5.7.7</a>:
+  HTML 5.1 standard, <a href="https://www.w3.org/TR/html51/editing.html#the-draggable-attribute">section
+    5.7.7</a>:
 </p>
 <blockquote>
   All html elements may have the draggable content attribute set. The draggable
@@ -20,14 +19,17 @@
   equals <code>auto</code>.
 </p>
 <hr>
+<p>
 <label>
-  {{input type="checkbox" checked=(mut lockstatus) name="locked"}}
-  Lock the draggable.
+  {{select-thingy inputAction=(action "changeLockstate")}} ← value of the <code>draggable</code> attribute
 </label>
+</p>
+<br />
 
-{{dnd-wrapper locked=lockstatus}}
 
-<AngleBracket draggable=draggableState></AngleBracket>
+{{dnd-wrapper draggableAttr=draggableState}}
+
+<AngleBracket draggable={{draggableState}}></AngleBracket>
 
 <div class="normal-div" draggable={{draggableState}}>(no-component-div)</div>
 
@@ -42,7 +44,13 @@
   <tr>
     <td>Curly</td>
     <td><code>{{curlyAttr}}</code></td>
-    <td rowspan=3><code>draggable="{{draggableState}}"</code></td>
+    <td rowspan=3>
+      {{#if attributeMustBeOmitted}}
+        <em>(attribute omitted)</em>
+      {{else}}
+        <code>draggable="{{draggableState}}"</code>
+      {{/if}}
+    </td>
   </tr>
   <tr>
     <td>Angle-Bracket</td>
@@ -54,6 +62,7 @@
   </tr>
   <tr>
     <td>static-div</td>
-    <td><code>{{staticDivAttr}}</code></td><td><code>draggable="false"</code></td>
+    <td><code>{{staticDivAttr}}</code></td>
+    <td><code>draggable="false"</code></td>
   </tr>
 </table>

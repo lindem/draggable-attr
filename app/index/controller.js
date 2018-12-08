@@ -1,5 +1,5 @@
 import Controller from '@ember/controller';
-import {computed} from '@ember/object';
+import {computed, set} from '@ember/object';
 import {VERSION} from '@ember/version';
 
 function getDraggableAttr(sel) {
@@ -7,12 +7,33 @@ function getDraggableAttr(sel) {
 }
 
 export default Controller.extend({
-  lockstatus: true,
   version: computed(function() {
     return VERSION;
   }),
+
+  // strings 'null', 'true', 'false' -- select tag provides strings, see below
+  lockstatus: 'null',
+
+  attributeMustBeOmitted: computed('lockstatus', function() {
+    if (this.lockstatus === 'null') {
+      return true;
+    }
+  }),
+
+  // make boolean values or null from the string above
   draggableState: computed('lockstatus', function() {
-    return this.lockstatus ? 'false' : 'true';
+    switch (this.lockstatus) {
+      case 'true':
+        return true;
+      case 'false':
+        return false;
+      default:
+        return null;
+    }
+  }),
+
+  stateType: computed('draggableState', function() {
+    return typeof this.draggableState;
   }),
 
   curlyAttr: computed('lockstatus', function() {
@@ -28,5 +49,11 @@ export default Controller.extend({
   }),
   staticDivAttr: computed(function() {
     return getDraggableAttr('.static-div');
-  })
+  }),
+
+  actions: {
+    changeLockstate(newState) {
+      set(this, 'lockstatus', newState);
+    }
+  }
 });
