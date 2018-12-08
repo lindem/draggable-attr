@@ -1,14 +1,26 @@
-This repo shows behaviour from ember 3.5 that likely constitutes a bug.
+This repo shows behaviour from ember 3.4+ regarding the `draggable` attribute on
+HTML elements (spec: [section 5.7.7](https://www.w3.org/TR/html51/editing.html#the-draggable-attribute)).
 
-The alleged bug affects the `draggable` attribute on HTML elements (spec: [section 5.7.7](https://www.w3.org/TR/html51/editing.html#the-draggable-attribute)).
+It seems — at first — that ember does not allow to set the draggable attribute
+explicitly to (the string) `"false"`, which is a legitimate value for the
+attribute.
 
-It seems that ember does not allow to set the draggable attribute explicitly to
-`"false"`, which is a legitimate value for the attribute and prevents `img` and
-`a` elements from being draggable.
+The issue is that ember tries, as always, to make our lives easier by
+translating thusly:
 
-This repository uses a curly component with an `attributeBinding`. It seems that
-whenever a non-null value is set to the property, the result is <strong>always</strong>
-`draggable="true"`, which is wrong.
+* `null` means the tag is omitted
+* (boolean) `false` means the tag is set to (the string) false
+* (boolean) `true` (and really any other truthy value, sets the attribute to 
+  true
+  * both the strings `"true"` and `"false"` are truthy. This is where the
+    confusion stems from: it seems to work _half right_.
+
+This repository shows how it is done:
+
+* curly components just set an attribute binding to these values
+* angle bracket components have to use
+  `<AngleBracketComponent draggable={{value}}>` (with curlies).
+* everything else needs to bind to a property containing the correct values.
 
 Steps to try it:
 
