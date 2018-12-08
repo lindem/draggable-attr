@@ -14,15 +14,13 @@
   missing value default.
 </blockquote>
 <p>
-  However, I cannot seem to set draggable to explicit <code>"false"</code>; I
-  can only set draggable to null, which
-  equals <code>auto</code>.
+  Ember translates this to three values: the booleans <code>true</code> and <code>false</code>, and <code>null</code>.
 </p>
 <hr>
 <p>
-<label>
-  {{select-thingy inputAction=(action "changeLockstate")}} ← value of the <code>draggable</code> attribute
-</label>
+  <label>
+    {{select-thingy inputAction=(action "changeLockstate")}} ← value of the <code>draggable</code> attribute
+  </label>
 </p>
 <br />
 
