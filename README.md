@@ -10,7 +10,7 @@ translating thusly:
 
 * `null` means the tag is omitted
 * (boolean) `false` means the tag is set to (the string) false
-* (boolean) `true` (and really any other truthy value, sets the attribute to 
+* (boolean) `true` (and really any other truthy value), sets the attribute to 
   true
   * both the strings `"true"` and `"false"` are truthy. This is where the
     confusion stems from: it seems to work _half right_.
