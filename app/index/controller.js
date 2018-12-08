@@ -12,7 +12,7 @@ export default Controller.extend({
     return VERSION;
   }),
   draggableState: computed('lockstatus', function() {
-    return this.lockstatus ? 'false' : 'true';
+    return this.lockstatus ? false : true;
   }),
 
   curlyAttr: computed('lockstatus', function() {
